@@ -88,6 +88,13 @@ function calculate() {
 }
 
 const butnClear = document.querySelector('#clean');
+const butnDel = document.querySelector('#del');
+
+butnDel.addEventListener('click', function(){
+    display.innerText = display.innerText.slice(0,-1);
+    //display.innerText;
+    
+})
 
 function clearDisp() {
     displayValue =0;
