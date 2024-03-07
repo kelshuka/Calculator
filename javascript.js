@@ -1,24 +1,25 @@
 
 
 function calAdd(a,b) {
-    //let inp = inps.split('');
     return a+b;
 }
 
 function calSub(a,b) {
-    //let inp = inps.split('');
     return a-b;
 }
 
 function calMult(a,b) {
-    //let inp = inps.split('');
     return a*b;
 }
 
 function calDiv(a,b) {
-    //let inp = inps.split('');
     return a/b;
 }
+
+function calMod(a,b) {
+    return ((a % b) + b) % b;
+}
+
 
 
 function operate(op,a,b) {
@@ -30,6 +31,8 @@ function operate(op,a,b) {
         return calMult(a,b);
     } else if (op == "/") {
          return calDiv(a,b);
+    } else if (op == "%") {
+        return calMod(a,b);
     } else {
         return "Type another operator";
     }
@@ -51,7 +54,6 @@ numbs.forEach(contents => {
 
         if(e.target.value=="+"||e.target.value=="-"||e.target.value=="*"||e.target.value=="/") {
             console.log("matched");
-            display.innerText = display.innerText.slice(1, display.innerText.length);
         }
         console.log(e.target.value + " clicked");
 })
@@ -62,14 +64,13 @@ numbs.forEach(contents => {
 const butnEquals = document.querySelector('#equals');
 
 let numArr = [];
-//let operator;
 let result = 0;
 let prevValue = 0;
 
 function calculate() {
     butnEquals.addEventListener('click', () => {
         let strng = display.innerText;
-        numArr = strng.split(/(?<=[-+*\/])|(?=[-+*\/])/);
+        numArr = strng.split(/(?<=[-+*%\/])|(?=[-+*%\/])/);
         console.log(numArr);
         try{
             while(numArr.length!=1){
@@ -77,11 +78,9 @@ function calculate() {
             numArr.splice(0,2);
             numArr[0] = result;
             display.innerText = numArr.join("");
-            console.log("inside while");
             }
             display.innerText = result;
             console.log(result);
-            //console.log(numArr);
             console.log(display);
         }catch(err){alert("error!!");}
     });
@@ -91,8 +90,8 @@ const butnClear = document.querySelector('#clean');
 const butnDel = document.querySelector('#del');
 
 butnDel.addEventListener('click', function(){
-    display.innerText = display.innerText.slice(0,-1);
-    //display.innerText;
+    displayValue = displayValue.slice(0,-1);
+    display.innerText = displayValue;
     
 })
 
@@ -109,15 +108,3 @@ butnClear.addEventListener('click', function(){
 calculate();
 clearDisp();
 
-
-//numbs.forEach(contents => {
- //   contents.addEventListener('click', (e) => {
-        //displayUpdate(e);
- //   })
-//})
-
-
-//let displayUpdate = (e) => {
- //   displayValue += e.target.value;
- //   display.innerText = displayValue;
-//};
